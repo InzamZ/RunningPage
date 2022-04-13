@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://run.misaka19614.com/sitemap/sitemap-index.xml
+Host: https://run.misaka19614.com
