@@ -112,13 +112,24 @@ jobs:
           python scripts/gen_svg.py --from-db --type circular --use-localtime
           python scripts/gen_svg.py --from-db --year $(date +"%Y")  --language zh_CN --title "$(date +"%Y") Running" --type github --athlete "${{ env.ATHLETE }}" --special-distance 10 --special-distance2 20 --special-color yellow --special-color2 red --output assets/github_$(date +"%Y").svg --use-localtime --min-distance 0.5
 
-      - name: Push new runs
-        uses: github-actions-x/commit@v2.8
+      - name: Run safe dir
+        run: |
+          git config --global --add safe.directory /github/workspace
+
+      - name: Push README
+        uses: actions-js/push@master
         with:
-          github-token: ${{ secrets.G_T }}
-          commit-message: "Add new runs"
-          push-branch: master
-          files: activities src/static/ scripts/ assets/ GPX_OUT/
-          rebase: 'true'
-          name: ${{ env.GITHUB_NAME }}
-          email: ${{ env.GITHUB_EMAIL }}
+          github_token: ${{ secrets.G_T }}
+          branch: ${{ github.head_ref }}
+          force: true
+      
+      # - name: Push new runs
+      #   uses: github-actions-x/commit@v2.8
+      #   with:
+      #     github-token: ${{ secrets.G_T }}
+      #     commit-message: "Add new runs"
+      #     push-branch: master
+      #     files: activities src/static/ scripts/ assets/ GPX_OUT/
+      #     rebase: 'true'
+      #     name: ${{ env.GITHUB_NAME }}
+      #     email: ${{ env.GITHUB_EMAIL }}
