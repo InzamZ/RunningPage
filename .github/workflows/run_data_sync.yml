@@ -25,7 +25,7 @@ env:
   MIN_GRID_DISTANCE: 1 # change min distance here
   TITLE_GRID: Over 1km Runs # also here
   GITHUB_NAME: InzamZ
-  GITHUB_EMAIL: inzamzheng@gmail.com
+  GITHUB_EMAIL: me@inzamz.top
 
 jobs:
   sync:
@@ -119,5 +119,6 @@ jobs:
           commit-message: "Add new runs"
           files: activities src/static/ scripts/ assets/ GPX_OUT/
           rebase: 'true'
+          force-add: true
           name: ${{ env.GITHUB_NAME }}
           email: ${{ env.GITHUB_EMAIL }}
